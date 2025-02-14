@@ -1,0 +1,23 @@
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+        stage('Check Running Jobs') {
+            steps {
+                script {
+                    def nodeName = "build-node"
+                    def instanceId = "instance-id"
+
+                    def busyExecutors = jenkins.model.Jenkins.instance.computers.find { it.name == nodeName }?.countBusy() ?: 0
+
+                    if (busyExecutors == 0) {
+                        echo "Keine laufenden Jobs auf ${nodeName}. Fahre Instanz herunter..."
+                    } else {
+                        echo "${busyExecutors} laufende Jobs auf ${nodeName}."
+                    }
+                }
+            }
+        }
+    }
+}
