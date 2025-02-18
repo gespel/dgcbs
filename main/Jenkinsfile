@@ -9,7 +9,7 @@ pipeline {
 
                     def nodeName = "build-node"
                     def instanceId = "instance-id"
-                    while (True) {
+                    while (true) {
                         def busyExecutors = jenkins.model.Jenkins.instance.computers.find { it.name == nodeName }?.countBusy() ?: 0
 
                         if (busyExecutors == 0) {
