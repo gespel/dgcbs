@@ -1,24 +1,16 @@
 pipeline {
     agent nodeName
     stages {
-        stage("Check and start node") {
+        stage("start build") {
             agent {
-                label "main"
+                label "build-node"
             }
 
             steps {
                 script {
-                    def nodeName = "build-node"
-                    def instanceId = "instance-id"
-
-                    def isOnline = jenkins.model.Jenkins.instance.computers.find { it.name == nodeName }?.offline == false
-
-                    if (!isOnline) {
-                        echo "Node ${nodeName} ist offline. Starte Instanz..."
-                        //Start here
-                    }
-                    else {
-                        echo "Node ${nodeName} ist bereits online."
+                    while (true) {
+                        println "Building..."
+                        sleep(5)
                     }
                 }
             }

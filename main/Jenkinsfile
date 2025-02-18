@@ -24,4 +24,4 @@ pipeline {
         }
     }
 }
-println "Hello PSI from groovy!"
+//println "Hello PSI from groovy!"
