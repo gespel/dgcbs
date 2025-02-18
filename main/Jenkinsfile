@@ -8,7 +8,7 @@ pipeline {
                 script {
                     def computer = jenkins.model.Jenkins.instance.getComputer("")
                     if (computer) {
-                        def busyExecutors = computer.countBusy()
+                        def busyExecutors = computer.countBusy()-1
                         echo "Busy Executors: ${busyExecutors}"
                     } else {
                         echo "Knoten ${nodeName} nicht gefunden!"
