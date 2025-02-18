@@ -1,11 +1,9 @@
 pipeline {
-    agent nodeName
+    agent {
+        label "master"
+    }
     stages {
         stage("start build") {
-            agent {
-                label "build-node"
-            }
-
             steps {
                 script {
                     while (true) {

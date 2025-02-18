@@ -1,9 +1,9 @@
 pipeline {
     agent {
-        label 'master'
+        label "master"
     }
     stages {
-        stage('Check Running Jobs') {
+        stage("Check Running Jobs") {
             steps {
                 script {
 
