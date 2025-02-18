@@ -6,12 +6,11 @@ pipeline {
         stage("Check Running Jobs") {
             steps {
                 script {
-                    def nodeName = "master"
-                    def computer = jenkins.model.Jenkins.instance.getComputer(nodeName)
+                    def node = jenkins.model.Jenkins.instance.computers.find { it.displayName == "master" }
                     while (true) {
                         
                         if (computer) {
-                            def busyExecutors = computer.countBusy()
+                            def busyExecutors = node.countBusy()
                             echo "Busy Executors: ${busyExecutors}"
                         } else {
                             echo "Knoten ${nodeName} nicht gefunden!"
