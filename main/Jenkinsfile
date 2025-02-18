@@ -6,12 +6,10 @@ pipeline {
         stage("Check Running Jobs") {
             steps {
                 script {
-
                     def nodeName = "master"
-                    def instanceId = "instance-id"
+                    def computer = jenkins.model.Jenkins.instance.getComputer(nodeName)
                     while (true) {
-                        def nodeName = "master"
-                        def computer = jenkins.model.Jenkins.instance.getComputer(nodeName)
+                        
                         if (computer) {
                             def busyExecutors = computer.countBusy()
                             echo "Busy Executors: ${busyExecutors}"
