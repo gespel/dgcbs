@@ -7,16 +7,12 @@ pipeline {
             steps {
                 script {
                     def computer = jenkins.model.Jenkins.instance.getComputer("")
-                    while (true) {
-                        
-                        if (computer) {
-                            def busyExecutors = computer.countBusy()
-                            echo "Busy Executors: ${busyExecutors}"
-                        } else {
-                            echo "Knoten ${nodeName} nicht gefunden!"
-                        }
-                        sleep(5)
-                    }
+                    if (computer) {
+                        def busyExecutors = computer.countBusy()
+                        echo "Busy Executors: ${busyExecutors}"
+                    } else {
+                        echo "Knoten ${nodeName} nicht gefunden!"
+                    } 
                 }
             }
         }
