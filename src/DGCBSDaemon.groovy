@@ -15,4 +15,15 @@ class DGCBSDaemon {
         
         return runningJobs.size()
     }
+
+    public bool checkIfWorkerIsOnline(name) {
+        jenkins.model.Jenkins.instance.nodes.each { node ->
+            if (node.name == name) {
+                if(node.isOnline()) {
+                    return true
+                }
+            }
+        }
+        return false        
+    }
 }
