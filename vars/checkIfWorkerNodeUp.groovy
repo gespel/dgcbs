@@ -5,6 +5,7 @@ def call(name, zone) {
     process.waitFor()
 
     def status = process.text.trim()
+    echo status
 
     if (status == "RUNNING") {
         return true
