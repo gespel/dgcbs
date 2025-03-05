@@ -1,4 +1,5 @@
 def call(name, zone) {
+    echo "Checking for ${name} in zone ${zone}"
     def command = "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances describe " + name + " --zone " + zone + " --format='get(status)'"
     
     def process = command.execute()
