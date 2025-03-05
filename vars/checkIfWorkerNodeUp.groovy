@@ -4,7 +4,7 @@ def call(name, zone) {
     def process = command.execute()
     process.waitFor()
 
-    def status = process.text.trim()
+    def status = process.text
     echo "Status is: " + status
 
     if (status == "RUNNING") {
