@@ -1,8 +1,6 @@
-def GCLOUDPATH = "/home/jenkins/google-cloud-sdk/bin/gcloud"
-
 def checkIfUp(name, zone) {
     echo "Checking for ${name} in zone ${zone}"
-    def status = sh(script: "${GCLOUDPATH} compute instances describe ${name} --zone ${zone} --format=\"get(status)\"",
+    def status = sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances describe ${name} --zone ${zone} --format=\"get(status)\"",
                     returnStdout: true).trim()
     echo "Status is: " + status
 
@@ -17,7 +15,7 @@ def checkIfUp(name, zone) {
 def call(name, zone) {
     if (!checkIfUp(name, zone)) {
         echo "Starting ${name} now..."
-        def status = sh(script: "${GCLOUDPATH} compute instances start ${name} --zone ${zone}",
+        def status = sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}",
                     returnStdout: true).trim()
         echo "Status is: " + status
         return true
