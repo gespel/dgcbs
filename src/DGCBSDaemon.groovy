@@ -26,4 +26,14 @@ class DGCBSDaemon {
         }
         return false
     }
+
+    public int getNumOfOnlineWorker() {
+        def count = 0
+        for (node in jenkins.model.Jenkins.instance.nodes) {
+            if(node.toComputer()?.isOnline()) {
+                count += 1
+            }
+        }
+        return count
+    }
 }
