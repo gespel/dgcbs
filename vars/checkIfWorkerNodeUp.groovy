@@ -4,6 +4,11 @@ def call(name, zone) {
     def process = command.execute()
     process.waitFor()
 
+    if (process.exitValue() != 0) {
+        echo "Fehler beim Ausführen des Befehls: ${process.err.text}"
+        return false
+    }
+
     def status = process.text
     echo "Status is: " + status
 
