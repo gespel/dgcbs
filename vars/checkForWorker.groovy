@@ -9,4 +9,5 @@ def call(name) {
     }
     
     echo "Es laufen ${runningJobs.size()} Jobs auf dem Knoten ${name}."
+    return runningJobs.size()
 }
