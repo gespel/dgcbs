@@ -19,11 +19,11 @@ class DGCBSDaemon {
     public boolean checkIfWorkerIsOnline(name) {
         jenkins.model.Jenkins.instance.nodes.each { node ->
             if (node.name == name) {
-                if(node.isOnline()) {
+                if(node.computer.isOnline()) {
                     return true
                 }
             }
         }
-        return false        
+        return false
     }
 }
