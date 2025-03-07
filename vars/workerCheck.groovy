@@ -39,7 +39,12 @@ def call(name, zone) {
         return true
     }
     else {
-        echo "Worker ${name} is already running. Nothing to do!"
+        if(checkIfJenkinsUp("build-slave")) {
+            echo "Worker ${name} is already running and jenkins started. Nothing to do!"
+        }
+        else {
+            echo "Worker ${name} is running but jenkins-agent is not started! CANNOT provision job!"
+        }
         return false
     }
 }
