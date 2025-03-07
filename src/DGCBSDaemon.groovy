@@ -3,6 +3,19 @@ class DGCBSDaemon {
         println("Creating a new dynamic gcloud build system daemon")
     }
 
+    public void checkWorkers() {
+        if(this.getNumJobsOfWorker() == 0 && this.checkIfWorkerIsOnline()) {
+            sleep 30
+            if(this.getNumJobsOfWorker() == 0 && this.checkIfWorkerIsOnline()) {
+                stopInstance("jenkins-slave", "europe-west10-a")
+            }
+        }
+    }
+
+    public void stopInstance(name, zone) {
+        sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true)
+    }
+
     public int getNumJobsOfWorker(name) {
         def runningJobs = []
         jenkins.model.Jenkins.instance.nodes.each { node ->

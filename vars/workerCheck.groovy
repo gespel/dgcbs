@@ -23,14 +23,13 @@ def checkIfJenkinsUp(name) {
 }
 
 def startInstance(name, zone) {
-
+    sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true).trim()
 }
 
 def call(name, zone) {
     if (!checkIfUp(name, zone)) {
         echo "Starting ${name} now..."
-        def status = sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}",
-                    returnStdout: true).trim()
+        startInstance(name, zone)
         echo "Started worker ${name} in ${zone} using gcloud CLI"
         echo "Waiting for jenkins-agent to come up..."
         while(!checkIfJenkinsUp("build-slave")) {
