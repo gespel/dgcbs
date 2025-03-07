@@ -11,13 +11,27 @@ def checkIfUp(name, zone) {
     }
 }
 
+def checkIfJenkinsUp(name, zone) {
+    for (node in jenkins.model.Jenkins.instance.nodes) {
+        if (node.name == name) {
+            if (node.toComputer()?.isOnline()) {
+                return true
+            }
+        }
+    }
+    return false
+}
 
 def call(name, zone) {
     if (!checkIfUp(name, zone)) {
         echo "Starting ${name} now..."
         def status = sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}",
                     returnStdout: true).trim()
-        echo "Status is: " + status
+        echo "Started worker ${name} in ${zone} using gcloud CLI"
+        echo "Waiting for jenkins-agent to come up..."
+        while(!checkIfJenkinsUp(name, zone)) {
+            sleep 5
+        }
         return true
     }
     else {
