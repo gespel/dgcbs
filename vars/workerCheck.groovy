@@ -34,7 +34,7 @@ def call(name, zone) {
         echo "Started worker ${name} in ${zone} using gcloud CLI"
         echo "Waiting for jenkins-agent to come up..."
         while(!checkIfJenkinsUp("build-slave")) {
-            sleep 5
+            sleep 10
         }
         return true
     }
