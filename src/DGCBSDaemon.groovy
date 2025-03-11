@@ -51,15 +51,15 @@ class DGCBSDaemon {
     }
 
     public ArrayList<String> check() {
-        def nodes = []
+        def onlineNodes = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
-                nodes.add(node.getNodeName())
+                onlineNodes.add(node.getNodeName())
             }
         }
 
         def workerContainers = []
-        for(node in nodes) {
+        for(node in onlineNodes) {
             def nameParts = node.split("-")
 
             def nodeClass = nameParts[0]
@@ -67,10 +67,26 @@ class DGCBSDaemon {
             def containerName = nameParts[2]
 
             if(nodeClass.equalsIgnoreCase("slave")) {
-                workerContainers.add([node, [nodeClass, nodeName, containerName]])
+                workerContainers.add([nodeClass, nodeName, containerName, node])
             }
         }
 
-        return workerContainers
+        def working = false
+        def temp = []
+        for(workerContainer in workerContainers) {
+            def numJobs = this.getNumJobsOfWorker(workerContainer[3])
+            temp.add([workerContainer, numJobs])
+            if(numJobs > 0) {
+                working = true
+                break
+            } 
+        }
+
+        if(!working) {
+            //stopInstance("jenkins-slave", "europe-west10-a")
+        }
+
+
+        return temp
     }
 }
