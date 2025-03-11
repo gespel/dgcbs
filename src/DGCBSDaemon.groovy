@@ -51,12 +51,26 @@ class DGCBSDaemon {
     }
 
     public ArrayList<String> check() {
-        def nodeNames = []
+        def nodes = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
-                nodeNames.add(node.getNodeName())
+                nodes.add(node.getNodeName())
             }
         }
-        return nodeNames
+
+        def workerContainers = []
+        for(node in nodes) {
+            def nameParts = node.split("-")
+
+            def nodeClass = nameParts[0]
+            def nodeName = nameParts[1]
+            def containerName = nameParts[2]
+
+            if(nodeClass.equalsIgnoreCase("slave")) {
+                workerContainers.add([node, [nodeClass, nodeName, containerName]])
+            }
+        }
+
+        return workerContainers
     }
 }
