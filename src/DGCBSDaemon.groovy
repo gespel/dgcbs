@@ -65,7 +65,7 @@ class DGCBSDaemon {
             def nodeClass = nameParts[0]
             def nodeName = nameParts[1]
             def containerName = nameParts[2]
-            def n = JenkinsNode(nodeClass, nodeName, containerName)
+            def n = new JenkinsNode(nodeClass, nodeName, containerName)
 
             if(nodeClass.equalsIgnoreCase("slave")) {
                 workerContainers.add([nodeClass, nodeName, containerName, node])
