@@ -6,13 +6,13 @@ class DBSServer {
         this.name = name
     }
 
-    public getNodes() {
+    public ArrayList<DynamicNode> getNodes() {
         return nodes
     }
-    public addNode(DynamicNode new) {
+    public void addNode(DynamicNode new) {
         this.nodes.add(new)
     }
-    public removeNode(String name) {
+    public void removeNode(String name) {
         for(int i = 0; i < this.nodes.size(); i++) {
             if(nodes[i].getName().equalsIgnoreCase(name)) {
                 this.nodes.remove(i)
