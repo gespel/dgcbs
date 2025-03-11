@@ -9,8 +9,8 @@ class DBSServer {
     public ArrayList<DynamicNode> getNodes() {
         return nodes
     }
-    public void addNode(DynamicNode new) {
-        this.nodes.add(new)
+    public void addNode(DynamicNode newNode) {
+        this.nodes.add(newNode)
     }
     public void removeNode(String name) {
         for(int i = 0; i < this.nodes.size(); i++) {
