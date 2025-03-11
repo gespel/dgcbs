@@ -110,6 +110,6 @@ class DGCBSDaemon {
             }
         }
  
-        return "Checking of build backends done. Changes:" + changes + " Debug: " + getWorkerContainers(onlineNodes).toString()
+        return "Checking of build backends done. Changes:" + changes + " Debug: " + this.servers[0].getNodes().toString()
     }
 }
