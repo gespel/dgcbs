@@ -3,6 +3,7 @@ class DGCBSDaemon {
 
     public DGCBSDaemon() {
         println("Creating a new dynamic gcloud build system daemon")
+        server = []
         servers.add(new DBSServer("srv1"))
     }
 
