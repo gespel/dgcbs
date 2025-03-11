@@ -1,3 +1,5 @@
+import groovy.transform.Field
+
 class JenkinsNode {
     @Field private String type
     @Field private String serverName
