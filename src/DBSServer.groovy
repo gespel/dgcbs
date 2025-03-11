@@ -4,7 +4,7 @@ class DBSServer {
 
     public DBSServer(String name) {
         this.name = name
-        this.nodes = []
+        this.nodes = new ArrayList<DynamicNode>();
     }
 
     public ArrayList<DynamicNode> getNodes() {
