@@ -1,13 +1,13 @@
 class JenkinsNode {
-    private String type;
-    private String serverName;
-    private String containerName;
-    private String id;
+    private String type
+    private String serverName
+    private String containerName
+    private String id
 
     public JenkinsNode(String type, String serverName, String containerName) {
-        this.type = type;
-        this.serverName = serverName;
-        this.containerName = containerName;
+        this.type = type
+        this.serverName = serverName
+        this.containerName = containerName
         this.id = type + serverName + containerName
     }
 
