@@ -55,6 +55,7 @@ class DGCBSDaemon {
     }
 
     public ArrayList<ArrayList<String>> getWorkerContainers(ArrayList<String> onlineNodes) {
+        def workerContainers = []
         for(node in onlineNodes) {
             def nameParts = node.split("-")
             if(nameParts[0].equalsIgnoreCase("slave")) {
