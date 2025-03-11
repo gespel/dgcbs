@@ -12,11 +12,11 @@ class JenkinsNode {
     }
 
     public String getServerName() {
-        return this.serverName;
+        return this.serverName
     }
 
     public String getContainerName() {
-        return this.containerName;
+        return this.containerName
     }
 
     public int getNumJobs() {
