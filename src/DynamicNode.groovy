@@ -1,10 +1,10 @@
-class JenkinsNode {
+class DynamicNode {
     private String type
     private String serverName
     private String containerName
     private String id
 
-    public JenkinsNode(String type, String serverName, String containerName) {
+    public DynamicNode(String type, String serverName, String containerName) {
         this.type = type
         this.serverName = serverName
         this.containerName = containerName

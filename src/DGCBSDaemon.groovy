@@ -50,7 +50,7 @@ class DGCBSDaemon {
         return count
     }
 
-    public ArrayList<JenkinsNode> check() {
+    public ArrayList<DynamicNode> check() {
         def onlineNodes = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
@@ -75,7 +75,7 @@ class DGCBSDaemon {
         def temp = []
         for(workerContainer in workerContainers) {
             def numJobs = this.getNumJobsOfWorker(workerContainer[3])
-            def n = new JenkinsNode(workerContainer[0], workerContainer[1], workerContainer[2])
+            def n = new DynamicNode(workerContainer[0], workerContainer[1], workerContainer[2])
             temp.add(n)
             if(numJobs > 0) {
                 working = true
