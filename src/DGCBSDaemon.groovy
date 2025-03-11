@@ -109,6 +109,6 @@ class DGCBSDaemon {
             }
         }
  
-        return "Checking of build backends done. Changes:" + changes + " Debug: " + servers[0].getNodes()[0].getNumJobs().toString()
+        return "Checking of build backends done. Changes:" + changes + " Debug: " + servers[0].getNodes().toString()
     }
 }
