@@ -70,7 +70,7 @@ class DGCBSDaemon {
     }
 
     public void updateServers(ArrayList<ArrayList<String>> workerContainers) {
-        this.servers[0].addNode(new DynamicNode(workerContainers[0][0], workerContainers[0][1], workerContainers[0][2]))
+        //this.servers[0].addNode(new DynamicNode(workerContainers[0][0], workerContainers[0][1], workerContainers[0][2]))
         for(wc in workerContainers) {
             for(s in this.servers) {
                 s.addNode(new DynamicNode(wc[0], wc[1], wc[2]))
@@ -112,6 +112,6 @@ class DGCBSDaemon {
             }
         }
  
-        return "Checking of build backends done. Changes:" + changes + " Debug: " + servers[0].getNodes().toString()
+        return "Checking of build backends done. Changes:" + changes + " Debug: " + getWorkerContainers(onlineNodes).toString()
     }
 }
