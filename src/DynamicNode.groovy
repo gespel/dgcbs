@@ -8,7 +8,7 @@ class DynamicNode {
         this.type = type
         this.serverName = serverName
         this.containerName = containerName
-        this.id = type + serverName + containerName
+        this.id = type + "-" + serverName + "-" + containerName
     }
 
     public String getServerName() {
