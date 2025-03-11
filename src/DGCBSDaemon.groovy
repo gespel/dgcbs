@@ -51,7 +51,7 @@ class DGCBSDaemon {
     }
 
     public ArrayList<String> check() {
-        def nodeNames = ["test"]
+        def nodeNames = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
                 nodeNames.add(node.getNodeName())
