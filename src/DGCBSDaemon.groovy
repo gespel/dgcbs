@@ -58,13 +58,13 @@ class DGCBSDaemon {
         def workerContainers = []
         for(node in onlineNodes) {
             def nameParts = node.split("-")
-            if(nameParts[0].equalsIgnoreCase("slave")) {
+            //if(nameParts[0].equalsIgnoreCase("slave")) {
                 def nodeClass = nameParts[0]
                 def nodeName = nameParts[1]
                 def containerName = nameParts[2]
 
                 workerContainers.add([nodeClass, nodeName, containerName, node])
-            }
+            //}
         }
         return workerContainers
     }
