@@ -1,6 +1,9 @@
 class DGCBSDaemon {
+    private ArrayList<DBSServer> servers
+
     public DGCBSDaemon() {
         println("Creating a new dynamic gcloud build system daemon")
+        servers.add(new DBSServer("srv1"))
     }
 
     public void checkWorkers() {
@@ -50,7 +53,20 @@ class DGCBSDaemon {
         return count
     }
 
-    public ArrayList<DynamicNode> check() {
+    public boolean isServerBusy(String name) {
+        for(int i = 0; i < this.servers.size(); i++) {
+            if(name.equalsIgnoreCase(this.servers[i].getName())) {
+                for(container in this.servers[i].getNodes()) {
+                    if(container.getNumJobs() > 0) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    public String check() {
         def onlineNodes = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
@@ -61,33 +77,29 @@ class DGCBSDaemon {
         def workerContainers = []
         for(node in onlineNodes) {
             def nameParts = node.split("-")
+            if(nameParts[0].equalsIgnoreCase("slave")) {
+                def nodeClass = nameParts[0]
+                def nodeName = nameParts[1]
+                def containerName = nameParts[2]
 
-            def nodeClass = nameParts[0]
-            def nodeName = nameParts[1]
-            def containerName = nameParts[2]
-
-            if(nodeClass.equalsIgnoreCase("slave")) {
                 workerContainers.add([nodeClass, nodeName, containerName, node])
             }
         }
 
-        def working = false
-        def temp = []
-        for(workerContainer in workerContainers) {
-            def numJobs = this.getNumJobsOfWorker(workerContainer[3])
-            def n = new DynamicNode(workerContainer[0], workerContainer[1], workerContainer[2])
-            temp.add(n)
-            if(numJobs > 0) {
-                working = true
-                break
-            } 
+        for(wc in workerContainers) {
+            for(s in this.servers) {
+                if(wc[1].equalsIgnoreCase(s.getName())) {
+                    s.add(new DynamicNode(wc[0], wc[1], wc[2]))
+                }
+            }
         }
 
-        if(!working) {
-            //stopInstance("jenkins-slave", "europe-west10-a")
+        for(server in this.servers) {
+            if(!isServerBusy) {
+                stopInstance("jenkins-slave", "europe-west10-a")
+            }
         }
-
-
-        return temp
+ 
+        return "Checking of build backends done"
     }
 }
