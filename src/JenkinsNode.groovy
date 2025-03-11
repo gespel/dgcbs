@@ -1,10 +1,8 @@
-import groovy.transform.Field
-
 class JenkinsNode {
-    @Field private String type
-    @Field private String serverName
-    @Field private String containerName
-    @Field private String id
+    private String type
+    private String serverName
+    private String containerName
+    private String id
 
     public JenkinsNode(String type, String serverName, String containerName) {
         this.type = type
