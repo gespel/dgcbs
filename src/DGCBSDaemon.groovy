@@ -75,7 +75,7 @@ class DGCBSDaemon {
         def temp = []
         for(workerContainer in workerContainers) {
             def numJobs = this.getNumJobsOfWorker(workerContainer[3])
-            def n = new JenkinsNode(nodeClass, nodeName, containerName)
+            def n = new JenkinsNode(workerContainer[0], workerContainer[1], workerContainer[2])
             temp.add(n)
             if(numJobs > 0) {
                 working = true
