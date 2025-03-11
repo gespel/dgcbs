@@ -68,6 +68,7 @@ class DGCBSDaemon {
     }
 
     public String check() {
+        def changes = ""
         def onlineNodes = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
@@ -98,9 +99,10 @@ class DGCBSDaemon {
         for(server in this.servers) {
             if(!isServerBusy(server.getName())) {
                 //stopInstance("jenkins-slave", "europe-west10-a")
+                changes += " !Shutdown of ${server.getName()}! "
             }
         }
  
-        return "Checking of build backends done"
+        return "Checking of build backends done. Changes:"
     }
 }
