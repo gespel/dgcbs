@@ -54,6 +54,19 @@ class DGCBSDaemon {
         return count
     }
 
+    public ArrayList<ArrayList<String>> getWorkerContainers(ArrayList<String> onlineNodes) {
+        for(node in onlineNodes) {
+            def nameParts = node.split("-")
+            if(nameParts[0].equalsIgnoreCase("slave")) {
+                def nodeClass = nameParts[0]
+                def nodeName = nameParts[1]
+                def containerName = nameParts[2]
+
+                workerContainers.add([nodeClass, nodeName, containerName, node])
+            }
+        }
+    }
+
     public void updateServers(ArrayList<ArrayList<String>> workerContainers) {
         for(wc in workerContainers) {
             for(s in this.servers) {
@@ -86,18 +99,8 @@ class DGCBSDaemon {
             }
         }
 
-        def workerContainers = []
-        for(node in onlineNodes) {
-            def nameParts = node.split("-")
-            if(nameParts[0].equalsIgnoreCase("slave")) {
-                def nodeClass = nameParts[0]
-                def nodeName = nameParts[1]
-                def containerName = nameParts[2]
-
-                workerContainers.add([nodeClass, nodeName, containerName, node])
-            }
-        }
-
+        def workerContainers = getWorkerContainers(onlineNodes)
+        
         updateServers(workerContainers)
 
         for(server in this.servers) {
