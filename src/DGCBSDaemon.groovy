@@ -90,14 +90,14 @@ class DGCBSDaemon {
         for(wc in workerContainers) {
             for(s in this.servers) {
                 if(wc[1].equalsIgnoreCase(s.getName())) {
-                    s.add(new DynamicNode(wc[0], wc[1], wc[2]))
+                    s.addNode(new DynamicNode(wc[0], wc[1], wc[2]))
                 }
             }
         }
 
         for(server in this.servers) {
             if(!isServerBusy) {
-                stopInstance("jenkins-slave", "europe-west10-a")
+                //stopInstance("jenkins-slave", "europe-west10-a")
             }
         }
  
