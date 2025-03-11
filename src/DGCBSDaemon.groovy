@@ -111,7 +111,7 @@ class DGCBSDaemon {
         }
 
         if(changes.equals("")) {
-            changes = "None"
+            changes = " None"
         }
  
         return "Checking of build backends done. Changes:" + changes + " Debug: "
