@@ -11,7 +11,7 @@ class DBSServer {
         return nodes
     }
     public void addNode(DynamicNode newNode) {
-        this.nodes.add(newNode)
+        nodes.add(newNode)
     }
     public void removeNode(String name) {
         for(int i = 0; i < this.nodes.size(); i++) {
