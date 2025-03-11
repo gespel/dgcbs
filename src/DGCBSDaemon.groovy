@@ -114,6 +114,6 @@ class DGCBSDaemon {
             changes = " None"
         }
  
-        return "Checking of build backends done. Changes:" + changes + " Debug: "
+        return "Checking of build backends done. Changes:" + changes// + " Debug: "
     }
 }
