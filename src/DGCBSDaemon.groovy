@@ -99,10 +99,8 @@ class DGCBSDaemon {
                 onlineNodes.add(node.getNodeName())
             }
         }
-
-        def workerContainers = getWorkerContainers(onlineNodes)
         
-        updateServers(workerContainers)
+        updateServers(getWorkerContainers(onlineNodes))
 
         for(server in this.servers) {
             if(!isServerBusy(server.getName())) {
