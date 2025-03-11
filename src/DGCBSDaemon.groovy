@@ -50,7 +50,7 @@ class DGCBSDaemon {
         return count
     }
 
-    public ArrayList<String> check() {
+    public ArrayList<JenkinsNode> check() {
         def onlineNodes = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
@@ -65,7 +65,6 @@ class DGCBSDaemon {
             def nodeClass = nameParts[0]
             def nodeName = nameParts[1]
             def containerName = nameParts[2]
-            def n = new JenkinsNode(nodeClass, nodeName, containerName)
 
             if(nodeClass.equalsIgnoreCase("slave")) {
                 workerContainers.add([nodeClass, nodeName, containerName, node])
@@ -76,7 +75,8 @@ class DGCBSDaemon {
         def temp = []
         for(workerContainer in workerContainers) {
             def numJobs = this.getNumJobsOfWorker(workerContainer[3])
-            temp.add([workerContainer, numJobs])
+            def n = new JenkinsNode(nodeClass, nodeName, containerName)
+            temp.add(n)
             if(numJobs > 0) {
                 working = true
                 break
