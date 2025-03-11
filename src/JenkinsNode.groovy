@@ -1,8 +1,8 @@
 class JenkinsNode {
-    private String type
-    private String serverName
-    private String containerName
-    private String id
+    @Field private String type
+    @Field private String serverName
+    @Field private String containerName
+    @Field private String id
 
     public JenkinsNode(String type, String serverName, String containerName) {
         this.type = type
@@ -12,11 +12,11 @@ class JenkinsNode {
     }
 
     public String getServerName() {
-        return this.serverName
+        return serverName
     }
 
     public String getContainerName() {
-        return this.containerName
+        return containerName
     }
 
     public int getNumJobs() {
