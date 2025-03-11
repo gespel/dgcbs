@@ -22,7 +22,7 @@ class DBSServer {
         }
     }
 
-    public getName() {
+    public String getName() {
         return name
     }
 }
