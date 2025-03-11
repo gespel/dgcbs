@@ -54,6 +54,16 @@ class DGCBSDaemon {
         return count
     }
 
+    public void updateServers(ArrayList<ArrayList<String>> workerContainers) {
+        for(wc in workerContainers) {
+            for(s in this.servers) {
+                if(wc[1].equalsIgnoreCase(s.getName())) {
+                    s.addNode(new DynamicNode(wc[0], wc[1], wc[2]))
+                }
+            }
+        }
+    }
+
     public boolean isServerBusy(String name) {
         for(int i = 0; i < this.servers.size(); i++) {
             if(name.equalsIgnoreCase(this.servers[i].getName())) {
@@ -88,13 +98,7 @@ class DGCBSDaemon {
             }
         }
 
-        for(wc in workerContainers) {
-            for(s in this.servers) {
-                if(wc[1].equalsIgnoreCase(s.getName())) {
-                    s.addNode(new DynamicNode(wc[0], wc[1], wc[2]))
-                }
-            }
-        }
+        updateServers(workerContainers)
 
         for(server in this.servers) {
             if(!isServerBusy(server.getName())) {
