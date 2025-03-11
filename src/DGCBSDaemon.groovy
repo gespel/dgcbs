@@ -69,6 +69,7 @@ class DGCBSDaemon {
     }
 
     public void updateServers(ArrayList<ArrayList<String>> workerContainers) {
+        this.servers[0].addNode(new DynamicNode(wc[0], wc[1], wc[2]))
         for(wc in workerContainers) {
             for(s in this.servers) {
                 s.addNode(new DynamicNode(wc[0], wc[1], wc[2]))
