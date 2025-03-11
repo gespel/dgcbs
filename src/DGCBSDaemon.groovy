@@ -103,6 +103,6 @@ class DGCBSDaemon {
             }
         }
  
-        return "Checking of build backends done. Changes:"
+        return "Checking of build backends done. Changes:" + changes
     }
 }
