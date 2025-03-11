@@ -109,7 +109,11 @@ class DGCBSDaemon {
                 changes += " !Shutdown of ${server.getName()}! "
             }
         }
+
+        if(changes.equals("")) {
+            changes = "None"
+        }
  
-        return "Checking of build backends done. Changes:" + changes + " Debug: " + this.servers[0].getNodes()[0].getNumJobs().toString()
+        return "Checking of build backends done. Changes:" + changes + " Debug: "
     }
 }
