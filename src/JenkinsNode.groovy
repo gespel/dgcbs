@@ -3,7 +3,7 @@ class JenkinsNode {
     private String serverName;
     private String containerName;
 
-    public JenkinsNode(type, serverName, containerName) {
+    public JenkinsNode(String type, String serverName, String containerName) {
         this.type = type;
         this.serverName = serverName;
         this.containerName = containerName;
