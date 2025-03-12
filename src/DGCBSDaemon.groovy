@@ -1,9 +1,11 @@
 class DGCBSDaemon {
     private ArrayList<DBSServer> servers
+    private ArrayList<String> inactiveServers
 
     public DGCBSDaemon() {
         println("Creating a new dynamic gcloud build system daemon")
         servers = []
+        inactiveServers = []
     }
 
     public void checkWorkers() {
@@ -104,6 +106,10 @@ class DGCBSDaemon {
         return false
     }
 
+    public ArrayList<String> getInactiveServers() {
+        return this.inactiveServers
+    }
+
     public String check() {
         def changes = ""
         def onlineNodes = []
@@ -124,8 +130,9 @@ class DGCBSDaemon {
 
         for(server in this.servers) {
             if(!isServerBusy(server.getName())) {
-                stopInstance(server.getName().toString(), "europe-west10-a")
+                //stopInstance(server.getName().toString(), "europe-west10-a")
                 changes += " !Shutdown of ${server.getName()}! "
+                inactiveServers.add(server.getName())
             }
         }
 
