@@ -26,24 +26,26 @@ def startInstance(name, zone) {
     sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true).trim()
 }
 
-def call(name, zone) {
+def call(input, zone) {
+    def inputSplit = input.split("-")
+    def name = inputSplit[1]
+
     if (!checkIfUp(name, zone)) {
         echo "Starting ${name} now..."
         startInstance(name, zone)
         echo "Started worker ${name} in ${zone} using gcloud CLI"
         echo "Waiting for jenkins-agent to come up..."
-        while(!checkIfJenkinsUp("build-slave")) {
+        while(!checkIfJenkinsUp(input)) {
             sleep 10
         }
         return true
     }
-    else {
-        if(checkIfJenkinsUp("build-slave")) {
-            echo "Worker ${name} is already running and jenkins started. Nothing to do!"
-        }
-        else {
-            echo "Worker ${name} is running but jenkins-agent is not started! CANNOT provision job!"
-        }
-        return false
+
+    if(checkIfJenkinsUp(input)) {
+        echo "Worker ${name} is already running and jenkins started. Nothing to do!"
     }
+    else {
+        echo "Worker ${name} is running but jenkins-agent is not started! CANNOT provision job!"
+    }
+    return false   
 }
