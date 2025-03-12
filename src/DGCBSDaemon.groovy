@@ -121,7 +121,7 @@ class DGCBSDaemon {
 
         for(server in this.servers) {
             if(!isServerBusy(server.getName())) {
-                //stopInstance("jenkins-slave", "europe-west10-a")
+                stopInstance(server.getName(), "europe-west10-a")
                 changes += " !Shutdown of ${server.getName()}! "
             }
         }
