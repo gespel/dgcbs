@@ -16,7 +16,10 @@ class DGCBSDaemon {
     }
 
     public void stopInstance(String name, String zone) {
-        sh(script: "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true)
+        //sh(script: "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true)
+        def p = "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}".execute()
+        p.waitFor()
+
     }
 
     public int getNumJobsOfWorker(name) {
