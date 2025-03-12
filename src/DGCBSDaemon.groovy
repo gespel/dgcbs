@@ -81,7 +81,9 @@ class DGCBSDaemon {
     public ArrayList<String> getOnlineServers(ArrayList<ArrayList<String>> workerContainers) {
         def out = []
         for(node in workerContainers) {
-            if(!out.contains(node[1]))
+            if(!out.contains(node[1])) {
+                out.add(node[1])
+            }
         }
         return out
     }
