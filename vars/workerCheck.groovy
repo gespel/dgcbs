@@ -1,6 +1,6 @@
 def checkIfUp(name, zone) {
     echo "Checking for ${name} in zone ${zone}"
-    def status = sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances describe ${name} --zone ${zone} --format=\"get(status)\"",
+    def status = sh(script: "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances describe ${name} --zone ${zone} --format=\"get(status)\"",
                     returnStdout: true).trim()
     echo "Status is: " + status
 
@@ -23,7 +23,7 @@ def checkIfJenkinsUp(name) {
 }
 
 def startInstance(name, zone) {
-    sh(script: "/home/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true).trim()
+    sh(script: "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true).trim()
 }
 
 def call(input, zone) {
