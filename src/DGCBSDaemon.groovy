@@ -4,7 +4,6 @@ class DGCBSDaemon {
     public DGCBSDaemon() {
         println("Creating a new dynamic gcloud build system daemon")
         servers = []
-        servers.add(new DBSServer("srv1"))
     }
 
     public void checkWorkers() {
@@ -79,6 +78,14 @@ class DGCBSDaemon {
         }
     }
 
+    public ArrayList<String> getOnlineServers(ArrayList<ArrayList<String>> workerContainers) {
+        def out = []
+        for(node in workerContainers) {
+            if(!out.contains(node[1]))
+        }
+        return out
+    }
+
     public boolean isServerBusy(String name) {
         for(int i = 0; i < this.servers.size(); i++) {
             if(name.equalsIgnoreCase(this.servers[i].getName())) {
@@ -100,8 +107,15 @@ class DGCBSDaemon {
                 onlineNodes.add(node.getNodeName())
             }
         }
-        
-        updateServers(getWorkerContainers(onlineNodes))
+
+        def workerContainers = getWorkerContainers(onlineNodes)
+
+        def onlineServers = getOnlineServers(workerContainers)
+        for(server in onlineServers) {
+            this.servers.add(new DBSServer(server))
+        }
+
+        updateServers(workerContainers)
 
         for(server in this.servers) {
             if(!isServerBusy(server.getName())) {
