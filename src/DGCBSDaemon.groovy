@@ -19,8 +19,8 @@ class DGCBSDaemon {
 
     public void stopInstance(String name, String zone) {
         //sh(script: "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true)
-        def p = "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}".execute()
-        p.waitFor()
+        //def p = "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}".execute()
+        //p.waitFor()
 
     }
 
@@ -107,7 +107,7 @@ class DGCBSDaemon {
     }
 
     public ArrayList<String> getInactiveServers() {
-        return this.inactiveServers
+        return inactiveServers
     }
 
     public String check() {
