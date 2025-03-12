@@ -15,7 +15,7 @@ class DGCBSDaemon {
         }
     }
 
-    public void stopInstance(name, zone) {
+    public void stopInstance(String name, String zone) {
         sh(script: "/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances start ${name} --zone ${zone}", returnStdout: true)
     }
 
