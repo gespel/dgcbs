@@ -7,7 +7,7 @@ public class JenkinsTerraform {
     public String init() {
         def sout = new StringBuilder(), serr = new StringBuilder()
 
-        def proc = "terraform -chdir=./${path} init -no-color".execute()
+        def proc = "terraform -chdir=${path} init -no-color".execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000000)
 
