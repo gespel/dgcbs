@@ -11,7 +11,19 @@ class InstanceCreator {
         return "$sout$serr"
     }
 
-    public String createInstance() {
-        return this.executeGCloudCommand("compute instances list")
+    public String terraformInitApply(String path) {
+        def sout_init = new StringBuilder(), serr_init = new StringBuilder(), sout_apply = new StringBuilder(), serr_apply = new StringBuilder()
+        def proc_init = "terraform -chdir=${path} init".execute()
+        proc_init.consumeProcessOutput(sout_init, serr_init)
+        proc_init.waitForOrKill(1000000)
+
+        def proc_apply = "terraform -chdir=${path} apply -var='instance_name=my_custom_vm'".execute()
+        proc_apply.consumeProcessOutput(sout_apply, serr_apply)
+        proc_apply.waitForOrKill(1000000)
+        return "$sout_init$serr_init\n$sout_apply$sout_apply"
+    }
+
+    public String createInstance(String name) {
+        return this.terraformInitApply("jenkins-gcloud-infra")
     }
 }
