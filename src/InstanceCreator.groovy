@@ -21,7 +21,8 @@ class InstanceCreator {
         def proc_apply = "terraform -chdir=./${path} apply -var='instance_name=my_custom_vm' -auto-approve".execute()
         proc_apply.consumeProcessOutput(sout_apply, serr_apply)
         proc_apply.waitForOrKill(1000000)
-        return "$sout_init$serr_init\n$sout_apply$sout_apply"
+
+        return "$sout_init$serr_init\n$sout_apply$serr_apply"
     }
 
     public String createInstance(String name) {
