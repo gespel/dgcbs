@@ -17,7 +17,7 @@ public class JenkinsTerraform {
     public String apply(String vars) {
         def sout = new StringBuilder(), serr = new StringBuilder()
 
-        def proc = "terraform -chdir=./${path} apply ${vars} -auto-approve -no-color".execute()
+        def proc = "terraform -chdir=${path} apply ${vars} -auto-approve -no-color".execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000000)
 
