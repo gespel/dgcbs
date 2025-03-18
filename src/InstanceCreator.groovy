@@ -8,6 +8,6 @@ class InstanceCreator {
         def proc = 'whoami'.execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000)
-        return sout
+        return "$sout"
     }
 }
