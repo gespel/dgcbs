@@ -8,6 +8,6 @@ class InstanceCreator {
         def proc = '/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances list'.execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000)
-        return "$sout $serr"
+        return "Out: $sout Error: $serr"
     }
 }
