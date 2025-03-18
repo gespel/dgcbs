@@ -24,6 +24,6 @@ class InstanceCreator {
     }
 
     public String createInstance(String name) {
-        return this.terraformInitApply("jenkins-gcloud-infra")
+        return this.terraformInitApply("jenkins-gcloud-infra/jenkins/slave")
     }
 }
