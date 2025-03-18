@@ -8,7 +8,7 @@ class InstanceCreator {
         def proc = '/var/lib/jenkins/google-cloud-sdk/bin/gcloud $command'.execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(100000)
-        return "$sout"
+        return "$sout $serr"
     }
 
     public String createInstance() {
