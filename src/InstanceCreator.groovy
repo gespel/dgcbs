@@ -3,11 +3,15 @@ class InstanceCreator {
 
     }
 
-    public String createInstance() {
+    public String executeGCloudCommand(String command) {
         def sout = new StringBuilder(), serr = new StringBuilder()
-        def proc = '/var/lib/jenkins/google-cloud-sdk/bin/gcloud compute instances list'.execute()
+        def proc = '/var/lib/jenkins/google-cloud-sdk/bin/gcloud $command'.execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(100000)
-        return "Out: $sout Error: $serr"
+        return "$sout"
+    }
+
+    public String createInstance() {
+        return this.executeGCloudCommand("compute instances list")
     }
 }
