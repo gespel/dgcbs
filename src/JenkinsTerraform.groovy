@@ -7,7 +7,7 @@ public class JenkinsTerraform {
     public String init() {
         def sout = new StringBuilder(), serr = new StringBuilder()
 
-        def proc = "terraform -chdir=./${path} -no-color init".execute()
+        def proc = "terraform -chdir=./${path} init -no-color".execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000000)
 
@@ -17,7 +17,7 @@ public class JenkinsTerraform {
     public String apply(String vars) {
         def sout = new StringBuilder(), serr = new StringBuilder()
 
-        def proc = "terraform -chdir=./${path} -no-color apply ${vars} -auto-approve".execute()
+        def proc = "terraform -chdir=./${path} apply ${vars} -auto-approve -no-color".execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000000)
 
