@@ -113,6 +113,7 @@ class DGCBSDaemon {
     public String check() {
         def changes = ""
         def onlineNodes = []
+        inactiveServers = []
         for(node in jenkins.model.Jenkins.instance.nodes) {
             if(node.toComputer()?.isOnline()) {
                 onlineNodes.add(node.getNodeName())
